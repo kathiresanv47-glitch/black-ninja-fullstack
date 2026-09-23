@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Track Order - Black Ninja</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .order-number {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        /* =========================
+           ORDER ITEMS
+        ========================= */
+
+        .items {
+            margin-top: 20px;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 12px;
+        }
+
+        .items h3 {
+            margin-top: 0;
+        }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 9px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .item-row:last-child {
+            border-bottom: none;
+        }
+
+        .total {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        /* =========================
+           STATUS TIMELINE
+        ========================= */
+
+        .timeline {
+            margin-top: 30px;
+        }
+
+        .status {
+            padding: 16px;
+            margin: 12px 0;
+            border-radius: 12px;
+            background: #eeeeee;
+            font-size: 17px;
+            transition: 0.3s;
+        }
+
+        .status.active {
+            background: #111;
+            color: white;
+            font-weight: bold;
+            transform: scale(1.02);
+        }
+
+        .status.completed {
+            background: #28a745;
+            color: white;
+            font-weight: bold;
+        }
+
+        .status.cancelled {
+            background: #dc3545;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        .message {
+            margin-top: 30px;
+            padding: 18px;
+            border-radius: 12px;
+            background: #f1f1f1;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="logo">
+        🥙 Black Ninja Shawarma
+    </div>
+
+    <div class="subtitle">
+        Live Order Tracking
+    </div>
+
+
+    <!-- =========================
+         ORDER NUMBER
+    ========================== -->
+
+    <div class="order-number">
+        Order #{{ order.id }}
+    </div>
+
+
+    <!-- =========================
+         ORDER ITEMS
+    ========================== -->
+
+    <div class="items">
+
+        <h3>🧾 Your Order</h3>
+
+
+        <div class="item-row">
+
+            <span>
+                Regular Shawarma
+            </span>
+
+            <strong>
+                {{ order.regular_qty }}
+            </strong>
+
+        </div>
+
+
+        <div class="item-row">
+
+            <span>
+                King Plate
+            </span>
+
+            <strong>
+                {{ order.king_qty }}
+            </strong>
+
+        </div>
+
+
+        <div class="item-row">
+
+            <span>
+                🍜 Maggi Soup
+            </span>
+
+            <strong>
+                {{ order.maggi_qty }}
+            </strong>
+
+        </div>
+
+
+        <div class="total">
+
+            Total: ₹{{ order.total }}
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         ORDER STATUS
+    ========================== -->
+
+    <div class="timeline">
+
+
+        <div class="status" id="placed">
+            ✓ Order Placed
+        </div>
+
+
+        <div class="status" id="preparing">
+            🍳 Preparing
+        </div>
+
+
+        <div class="status" id="packed">
+            📦 Packed
+        </div>
+
+
+        <div class="status" id="delivery">
+            🛵 Out for Delivery
+        </div>
+
+
+        <div class="status" id="delivered">
+            ✅ Delivered
+        </div>
+
+
+        <div class="status" id="cancelled">
+            ❌ Cancelled
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================
+         STATUS MESSAGE
+    ========================== -->
+
+    <div class="message" id="message">
+
+        Checking order status...
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+// =========================
+// Current Order ID
+// =========================
+
+const orderId = {{ order.id }};
+
+
+// =========================
+// Status Order
+// =========================
+
+const statusOrder = [
+
+    "Order Placed",
+
+    "Preparing",
+
+    "Packed",
+
+    "Out for Delivery",
+
+    "Delivered"
+
+];
+
+
+// =========================
+// Status Elements
+// =========================
+
+const elements = {
+
+    "Order Placed":
+        document.getElementById("placed"),
+
+    "Preparing":
+        document.getElementById("preparing"),
+
+    "Packed":
+        document.getElementById("packed"),
+
+    "Out for Delivery":
+        document.getElementById("delivery"),
+
+    "Delivered":
+        document.getElementById("delivered"),
+
+    "Cancelled":
+        document.getElementById("cancelled")
+
+};
+
+
+// =========================
+// Update Status
+// =========================
+
+function updateStatus(status) {
+
+
+    // Remove previous classes
+
+    Object.values(elements).forEach(element => {
+
+        element.classList.remove("active");
+
+        element.classList.remove("completed");
+
+        element.classList.remove("cancelled");
+
+    });
+
+
+    // =========================
+    // Cancelled
+    // =========================
+
+    if (status === "Cancelled") {
+
+        elements["Cancelled"]
+            .classList.add("cancelled");
+
+        document.getElementById("message")
+            .innerText =
+            "❌ Your order has been cancelled.";
+
+        return;
+    }
+
+
+    // =========================
+    // Current Status Index
+    // =========================
+
+    const currentIndex =
+        statusOrder.indexOf(status);
+
+
+    // =========================
+    // Update Timeline
+    // =========================
+
+    statusOrder.forEach((item, index) => {
+
+
+        if (index < currentIndex) {
+
+            elements[item]
+                .classList.add("completed");
+
+        }
+
+
+        else if (index === currentIndex) {
+
+            elements[item]
+                .classList.add("active");
+
+        }
+
+    });
+
+
+    // =========================
+    // Customer Message
+    // =========================
+
+    const message =
+        document.getElementById("message");
+
+
+    if (status === "Order Placed") {
+
+        message.innerText =
+            "📝 Your order has been received.";
+
+    }
+
+
+    else if (status === "Preparing") {
+
+        message.innerText =
+            "🍳 Your food is being prepared.";
+
+    }
+
+
+    else if (status === "Packed") {
+
+        message.innerText =
+            "📦 Your order has been packed.";
+
+    }
+
+
+    else if (status === "Out for Delivery") {
+
+        message.innerText =
+            "🛵 Your order is on the way!";
+
+    }
+
+
+    else if (status === "Delivered") {
+
+        message.innerText =
+            "🎉 Your order has been delivered!";
+
+    }
+
+}
+
+
+// =========================
+// Check Latest Status
+// =========================
+
+function checkOrderStatus() {
+
+
+    fetch(`/order_status/${orderId}`)
+
+        .then(response => response.json())
+
+        .then(data => {
+
+
+            if (data.success) {
+
+                updateStatus(data.status);
+
+            }
+
+        })
+
+
+        .catch(error => {
+
+            console.log(
+                "Status Error:",
+                error
+            );
+
+        });
+
+}
+
+
+// =========================
+// Check Immediately
+// =========================
+
+checkOrderStatus();
+
+
+// =========================
+// Live Update Every 3 Seconds
+// =========================
+
+setInterval(
+
+    checkOrderStatus,
+
+    3000
+
+);
+
+
+</script>
+
+
+</body>
+
+</html>

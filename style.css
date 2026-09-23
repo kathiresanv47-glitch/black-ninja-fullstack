@@ -1,0 +1,649 @@
+/* =====================================================
+   🔥 BLACK NINJA SHAWARMA - FULL WEBSITE CSS
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+
+    background-image: url("../image/black-ninja-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* =====================================================
+   🔥 NAVBAR
+===================================================== */
+
+.navbar {
+    background: #050505 !important;
+    border-bottom: 1px solid #222;
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.navbar-brand:hover {
+    color: #ff3030 !important;
+}
+
+.nav-link {
+    color: #ddd !important;
+    font-size: 16px;
+    margin-left: 15px;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #ff2020 !important;
+}
+
+
+/* =====================================================
+   🔥 HERO SECTION
+===================================================== */
+
+.hero {
+    min-height: 680px;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.35)
+        ),
+        url("../image/black-ninja-bg.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    overflow: hidden;
+}
+/* =====================================================
+   🔥 SECTION HEADINGS
+===================================================== */
+
+h2 {
+    font-weight: 800;
+}
+
+#menu-section h2 {
+    font-size: 42px;
+
+    text-shadow:
+        0 0 15px rgba(255, 0, 0, 0.4);
+}
+
+
+/* =====================================================
+   🔥 MENU SECTION
+===================================================== */
+
+#menu-section {
+    width: 100%;
+    padding: 60px 20px;
+    background: #0b0b0b;
+}
+
+
+/* ⭐ MAIN 3 CARD CONTAINER */
+
+.menu-container {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 25px;
+
+    align-items: stretch;
+}
+
+
+/* =====================================================
+   🔥 MENU CARD
+===================================================== */
+
+.menu-card {
+    width: 100%;
+    min-width: 0;
+
+    background: #151515;
+
+    border: 1px solid #333;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    padding-bottom: 25px;
+
+    text-align: center;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+/* =====================================================
+   🔥 MENU IMAGE - PERFECT SQUARE
+===================================================== */
+
+.menu-card img {
+    width: 100% !important;
+
+    height: 300px !important;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    display: block;
+
+    transition: transform 0.4s ease;
+}
+.maggie-img {
+    width: 100% !important;
+    height: 300px !important;
+    object-fit: cover !important;
+}
+
+/* =====================================================
+   🔥 MENU CARD TEXT
+===================================================== */
+
+.menu-card h3 {
+    color: white;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    margin-top: 22px;
+
+    margin-bottom: 12px;
+}
+
+.menu-card p {
+    color: #ffc107;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin: 0;
+}
+
+
+/* =====================================================
+   🔥 HOVER FIRE EFFECT
+===================================================== */
+
+.menu-card:hover {
+    transform: translateY(-8px);
+
+    border-color: #ff2020;
+
+    box-shadow:
+        0 0 10px #ff2020,
+        0 0 25px #ff4500,
+        0 0 45px rgba(255, 69, 0, 0.7),
+        0 0 70px rgba(255, 0, 0, 0.4);
+}
+
+.menu-card:hover img {
+    transform: scale(1.04);
+}
+
+
+/* =====================================================
+   🔥 QUANTITY BUTTONS
+===================================================== */
+
+.quantity {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-top: 20px;
+}
+
+.quantity button {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #e50914;
+
+    color: white;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.quantity button:hover {
+    background: #ff2638;
+
+    transform: scale(1.1);
+}
+
+.quantity span {
+    min-width: 35px;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: white;
+}
+
+
+/* =====================================================
+   🔥 WHY CHOOSE US
+===================================================== */
+
+section.container {
+    background: #0b0b0b;
+}
+
+section.container h2 {
+    font-size: 40px;
+}
+
+section.container i {
+    text-shadow:
+        0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+section.container h5 {
+    color: #eeeeee;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   🔥 ORDER SECTION
+===================================================== */
+
+#order {
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+}
+
+#order .card {
+    background: #151515 !important;
+
+    border: 1px solid #292929;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Total Box */
+.total-box {
+    color: white !important;
+}
+
+.total-box p {
+    color: white !important;
+}
+
+.total-box h4 {
+    color: white !important;
+}
+
+.total-box span {
+    color: white !important;
+}
+/* =====================================================
+   🔥 FORM INPUTS
+===================================================== */
+
+#order .form-control,
+#order .form-select {
+    background: #0b0b0b !important;
+
+    color: white !important;
+
+    border: 1px solid #444 !important;
+
+    border-radius: 10px;
+
+    padding: 12px;
+
+    transition: 0.3s;
+}
+
+#order .form-control:focus,
+#order .form-select:focus {
+    border-color: #e50914 !important;
+
+    box-shadow:
+        0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+#order .form-control::placeholder {
+    color: #999;
+}
+
+
+/* =====================================================
+   🔥 DELIVERY CHARGE
+===================================================== */
+
+.alert-warning {
+    background: #241f0b !important;
+
+    color: #ffc107 !important;
+
+    border: 1px solid #5c4b12;
+}
+
+
+/* =====================================================
+   🔥 QR PAYMENT
+===================================================== */
+
+#qrSection {
+    background: #0b0b0b;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    border: 1px solid #333;
+}
+
+#qrSection img {
+    border: 5px solid white;
+
+    border-radius: 10px;
+
+    padding: 5px;
+
+    background: white;
+}
+
+
+/* =====================================================
+   🔥 PLACE ORDER BUTTON
+===================================================== */
+
+.order-btn {
+    background: #e50914 !important;
+
+    border: none !important;
+
+    padding: 14px 40px;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    border-radius: 30px;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 0 15px rgba(255, 0, 0, 0.4);
+}
+
+.order-btn:hover {
+    background: #ff2638 !important;
+
+    transform: scale(1.05);
+
+    box-shadow:
+        0 0 30px rgba(255, 0, 0, 0.7);
+}
+
+
+/* =====================================================
+   🔥 CONTACT
+===================================================== */
+
+#contact {
+    background: #080808;
+
+    padding-top: 70px !important;
+    padding-bottom: 70px !important;
+}
+
+#contact .card {
+    background: #151515 !important;
+
+    color: white;
+
+    border: 1px solid #292929;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+#contact h2 {
+    color: #ff2638;
+
+    font-weight: 800;
+}
+
+#contact p {
+    color: #ddd;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   🔥 FOOTER
+===================================================== */
+
+footer {
+    background: #000;
+
+    border-top: 1px solid #222;
+
+    text-align: center;
+
+    padding: 25px 10px;
+}
+
+footer p {
+    margin: 0;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   🔥 ANIMATION
+===================================================== */
+
+@keyframes heroTitle {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* =====================================================
+   🔥 STICKY CART
+===================================================== */
+
+.sticky-cart {
+    position: fixed;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+
+    background: white;
+
+    color: black;
+
+    padding: 12px 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    z-index: 9999;
+
+    box-shadow:
+        0 -3px 15px rgba(0, 0, 0, 0.5);
+}
+
+.sticky-cart button {
+    background: #e50914;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+}
+
+.sticky-cart button:hover {
+    background: #ff1a1a;
+}
+
+
+/* =====================================================
+   📱 MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .hero {
+        min-height: 550px;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+
+        letter-spacing: 2px;
+    }
+
+    .hero p {
+        font-size: 16px;
+
+        letter-spacing: 3px;
+    }
+
+    .hero .btn {
+        font-size: 17px;
+
+        padding: 12px 30px;
+    }
+
+    #menu-section {
+        padding: 40px 15px;
+    }
+
+    #menu-section h2 {
+        font-size: 32px;
+    }
+
+    /* Mobile-la one by one */
+
+    .menu-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .menu-card img {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 1 / 1;
+    }
+
+    section.container h2 {
+        font-size: 32px;
+    }
+}
+
+
+/* =====================================================
+   📱 SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .menu-card img {
+        aspect-ratio: 1 / 1;
+    }
+
+    .menu-card h3 {
+        font-size: 22px;
+    }
+
+    .quantity {
+        gap: 15px;
+    }
+}
