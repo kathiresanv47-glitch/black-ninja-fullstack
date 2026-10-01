@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Black Ninja Shawarma</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Our CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body>
+    <!-- ========================= -->
+<!-- Navbar -->
+<!-- ========================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold text-danger" href="#">
+            🔥 BLACK NINJA
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#menu-section">
+                        Menu
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#order">
+                        Order
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+<!-- ========================= -->
+<!-- Hero Section -->
+<!-- ========================= -->
+
+<section class="hero d-flex align-items-center text-center">
+
+    <div class="container">
+
+        <h1 class="display-3 fw-bold text-danger">
+            BLACK NINJA SHAWARMA
+        </h1>
+
+        <p class="lead text-light mt-3">
+            Fresh • Hot • Delicious
+        </p>
+
+        <a
+            href="#menu-section"
+            class="btn btn-danger btn-lg mt-3">
+
+            Order Now
+
+        </a>
+
+    </div>
+
+</section>
+<!-- ========================= -->
+<!-- Menu Section -->
+<!-- ========================= -->
+
+<section id="menu-section" class="py-5">
+
+    <div class="container">
+
+        <h2 class="text-center text-danger mb-5">
+            Our Menu
+        </h2>
+
+        <div class="row g-4 justify-content-center">
+
+            <!-- Regular Shawarma -->
+            <div class="col-md-4">
+
+                <div class="menu-card">
+
+                    <img
+                        src="{{ url_for('static', filename='images/regular-shawarma.jpg') }}"
+                        alt="Regular Shawarma">
+
+                    <div class="card-body text-center p-4">
+
+                        <h3>Regular Shawarma</h3>
+
+                        <p class="text-warning">
+                            ₹100
+                        </p>
+
+                        <div class="quantity">
+
+                            <button onclick="changeQty('regularQty', -1)">
+                                -
+                            </button>
+
+                            <span id="regularQty">0</span>
+
+                            <button onclick="changeQty('regularQty', 1)">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- King Plate Shawarma -->
+            <div class="col-md-4">
+
+                <div class="menu-card">
+
+                    <img
+                        src="{{ url_for('static', filename='images/king-plate-shawarma.jpg') }}"
+                        alt="King Plate Shawarma">
+
+                    <div class="card-body text-center p-4">
+
+                        <h3>King Plate Shawarma</h3>
+
+                        <p class="text-warning">
+                            ₹150
+                        </p>
+
+                        <div class="quantity">
+
+                            <button onclick="changeQty('kingQty', -1)">
+                                -
+                            </button>
+
+                            <span id="kingQty">0</span>
+
+                            <button onclick="changeQty('kingQty', 1)">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Maggie Soup -->
+            <div class="col-md-4">
+
+                <div class="menu-card">
+
+                    <img
+                        src="{{ url_for('static', filename='images/maggie-soup.jpg') }}"
+                        alt="Maggie Soup">
+
+                    <div class="card-body text-center p-4">
+
+                        <h3>Maggie Soup</h3>
+
+                        <p class="text-warning">
+                            ₹50
+                        </p>
+
+                        <div class="quantity">
+
+                            <button onclick="changeQty('maggieQty', -1)">
+                                -
+                            </button>
+
+                            <span id="maggieQty">0</span>
+
+                            <button onclick="changeQty('maggieQty', 1)">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ========================= -->
+<!-- Why Choose Us -->
+<!-- ========================= -->
+
+<section class="container py-5">
+
+    <h2 class="text-center text-danger fw-bold mb-5">
+        Why Choose Black Ninja?
+    </h2>
+
+    <div class="row text-center">
+
+        <div class="col-lg-3 col-6 mb-4">
+
+            <i class="bi bi-fire fs-1 text-danger"></i>
+
+            <h5 class="mt-3">
+                Fresh Food
+            </h5>
+
+        </div>
+
+
+        <div class="col-lg-3 col-6 mb-4">
+
+            <i class="bi bi-clock fs-1 text-danger"></i>
+
+            <h5 class="mt-3">
+                Fast Delivery
+            </h5>
+
+        </div>
+
+
+        <div class="col-lg-3 col-6 mb-4">
+
+            <i class="bi bi-award fs-1 text-danger"></i>
+
+            <h5 class="mt-3">
+                Best Quality
+            </h5>
+
+        </div>
+
+
+        <div class="col-lg-3 col-6 mb-4">
+
+            <i class="bi bi-star-fill fs-1 text-danger"></i>
+
+            <h5 class="mt-3">
+                Top Rated
+            </h5>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ========================= -->
+<!-- Order Section -->
+<!-- ========================= -->
+
+<section class="container py-5" id="order">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card p-4 bg-dark">
+
+                <h2 class="text-center text-danger mb-4">
+                    Place Your Order
+                </h2>
+
+                <form id="orderForm">
+
+                    <!-- Customer Name -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label text-white">
+                            Customer Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            class="form-control bg-dark text-white border-white"
+                            placeholder="Enter Your Name">
+
+                    </div>
+
+                    <!-- Phone Number -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label text-white">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            class="form-control bg-dark text-white border-white"
+                            placeholder="Enter Your Phone Number">
+
+                    </div>
+
+                    <!-- Delivery Address -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label text-white">
+                            Delivery Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            class="form-control bg-dark text-white border-white"
+                            rows="3"
+                            placeholder="Enter Delivery Address"></textarea>
+
+                    </div>
+                    <!-- ========================= -->
+                     <div class="text-center mt-4">
+    <h3>📦 Track Your Order</h3>
+
+    <input
+        type="number"
+        id="trackOrderId"
+        class="form-control mx-auto"
+        style="max-width: 300px;"
+        placeholder="Enter Order ID"
+    >
+
+    <button
+        type="button"
+        class="btn btn-danger mt-3"
+        onclick="trackMyOrder()">
+        🔍 Track Order
+    </button>
+</div>
+<!-- Payment Method -->
+<!-- ========================= -->
+
+<div class="mb-3">
+
+    <label class="form-label text-white">
+        Payment Method
+    </label>
+
+    <select
+        id="payment"
+        class="form-select bg-dark text-white border-white">
+
+        <option value="Cash on Delivery">
+            Cash on Delivery (+₹20 Delivery Charge)
+        </option>
+
+        <option value="Online Payment">
+            Online Payment (+₹20 Delivery Charge)
+        </option>
+
+    </select>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- Delivery Charge -->
+<!-- ========================= -->
+
+<div class="alert alert-warning text-dark d-flex justify-content-between align-items-center mt-3">
+
+    <strong>
+        🚚 Delivery Charge
+    </strong>
+
+    <strong>
+        ₹20
+    </strong>
+
+</div>
+<!-- ========================= -->
+<!-- QR Payment Section -->
+<!-- Online Payment Only -->
+<!-- ========================= -->
+
+<div id="qrSection" style="display: none; text-align: center;">
+
+    <h5>Scan QR to Pay</h5>
+
+    <img
+        src="{{ url_for('static', filename='images/qr-code.png') }}"
+        alt="Payment QR Code"
+        width="220">
+
+    <p>Scan this QR code using your UPI app</p>
+
+</div>
+<div class="total-box">
+
+    <p>Food Total: <span id="foodTotal">₹0</span></p>
+
+    <p>Delivery Charge: <span id="deliveryCharge">₹20</span></p>
+
+    <h4>Grand Total: <span id="grandTotal">₹20</span></h4>
+
+</div>
+<!-- ========================= -->
+<!-- Place Order Button -->
+<!-- ========================= -->
+
+<div class="text-center mt-4">
+
+    <button
+        type="submit"
+        id="placeOrderBtn"
+        class="btn btn-danger order-btn">
+
+        🛒 Place Order
+
+    </button>
+
+</div>
+</form>
+<!-- ========================= -->
+<!-- Contact Section -->
+<!-- ========================= -->
+
+<section id="contact" class="py-5">
+
+    <div class="container">
+
+        <div class="card p-4 text-center">
+
+            <h2>Contact Us</h2>
+
+            <p class="mt-3">
+                <strong>Black Ninja Shawarma</strong>
+            </p>
+
+            <p>
+                📍 Devar Selai Opposite, Near By Nowmi Salon,
+                Gudalur, Theni - 625518
+            </p>
+
+            <p>
+                📞 +91 9360796776
+            </p>
+
+            <p>
+                🕕 6:00 PM - 10:00 PM
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ========================= -->
+<!-- Footer -->
+<!-- ========================= -->
+
+<footer>
+
+    <p>
+        © 2026 Black Ninja Shawarma | All Rights Reserved
+    </p>
+
+</footer>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Black Ninja JS -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<!-- Sticky Cart Bar -->
+<div class="sticky-cart">
+    <span>
+        <b id="cartItems">0</b> Items
+    </span>
+
+    <span>
+        <b id="cartTotal">₹0</b>
+    </span>
+
+    <button onclick="scrollToOrder()">
+        View Cart →
+    </button>
+</div>
+
+</body>
+</html>
