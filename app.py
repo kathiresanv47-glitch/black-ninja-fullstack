@@ -2,16 +2,18 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 import mysql.connector
 import threading
 import time
+import os
 
 app = Flask(__name__)
 
 
 def get_db_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="black_ninja"
+        host=os.getenv("MYSQLHOST"),
+        port=int(os.getenv("MYSQLPORT", "3306")),
+        user=os.getenv("MYSQLUSER"),
+        password=os.getenv("MYSQLPASSWORD"),
+        database=os.getenv("MYSQLDATABASE")
     )
 
 
