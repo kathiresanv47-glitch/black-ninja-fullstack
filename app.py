@@ -1,15 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import mysql.connector
-from datetime import datetime, timedelta
 import threading
 import time
 
 app = Flask(__name__)
 
 
-# =========================
-# MySQL Database Connection
-# =========================
 def get_db_connection():
     return mysql.connector.connect(
         host="localhost",
@@ -19,31 +15,21 @@ def get_db_connection():
     )
 
 
-# =========================
-# Automatic Order Status
-# =========================
 def automatic_order_status(order_id):
-
     time.sleep(10 * 60)
-
     update_order_status(order_id, "Preparing")
 
     time.sleep(10 * 60)
-
     update_order_status(order_id, "Packed")
 
     time.sleep(10 * 60)
-
     update_order_status(order_id, "Out for Delivery")
 
     time.sleep(15 * 60)
-
     update_order_status(order_id, "Delivered")
-# =========================
-# Update Status in Database
-# =========================
-def update_order_status(order_id, status):
 
+
+def update_order_status(order_id, status):
     db = get_db_connection()
     cursor = db.cursor()
 
@@ -54,7 +40,6 @@ def update_order_status(order_id, status):
     """
 
     cursor.execute(sql, (status, order_id))
-
     db.commit()
 
     cursor.close()
@@ -63,22 +48,14 @@ def update_order_status(order_id, status):
     print(f"Order #{order_id} status changed to: {status}")
 
 
-# =========================
-# Home Page
-# =========================
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-# =========================
-# Save Order
-# =========================
 @app.route("/save_order", methods=["POST"])
 def save_order():
-
     try:
-
         name = request.form.get("name")
         phone = request.form.get("phone")
         address = request.form.get("address")
@@ -124,7 +101,6 @@ def save_order():
         )
 
         cursor.execute(sql, values)
-
         db.commit()
 
         order_id = cursor.lastrowid
@@ -145,7 +121,6 @@ def save_order():
         print("Status:", order_status)
         print("--------------------")
 
-        # Automatic status tracking
         status_thread = threading.Thread(
             target=automatic_order_status,
             args=(order_id,)
@@ -159,7 +134,6 @@ def save_order():
         )
 
     except Exception as e:
-
         print("================================")
         print("SAVE ORDER ERROR:")
         print(e)
@@ -170,29 +144,9 @@ def save_order():
             "error": str(e)
         }), 500
 
-    # =====================================
-    # Start Automatic Status Tracking
-    # =====================================
-    status_thread = threading.Thread(
-        target=automatic_order_status,
-        args=(order_id,)
-    )
 
-    status_thread.daemon = True
-    status_thread.start()
-
-    # Customer tracking page
-    return redirect(
-        url_for("track_order", order_id=order_id)
-    )
-
-
-# =========================
-# Customer Order Tracking
-# =========================
 @app.route("/track/<int:order_id>")
 def track_order(order_id):
-
     db = get_db_connection()
     cursor = db.cursor(dictionary=True)
 
@@ -217,12 +171,8 @@ def track_order(order_id):
     )
 
 
-# =========================
-# Live Order Status API
-# =========================
 @app.route("/order_status/<int:order_id>")
 def order_status(order_id):
-
     db = get_db_connection()
     cursor = db.cursor(dictionary=True)
 
@@ -250,12 +200,8 @@ def order_status(order_id):
     })
 
 
-# =========================
-# Owner - View All Orders
-# =========================
 @app.route("/owner/orders")
 def owner_orders():
-
     db = get_db_connection()
     cursor = db.cursor(dictionary=True)
 
@@ -277,15 +223,11 @@ def owner_orders():
     )
 
 
-# =========================
-# Owner - Manual Update Status
-# =========================
 @app.route(
     "/owner/update_status/<int:order_id>",
     methods=["POST"]
 )
 def update_status(order_id):
-
     new_status = request.form.get("order_status")
 
     allowed_statuses = [
@@ -324,8 +266,5 @@ def update_status(order_id):
     )
 
 
-# =========================
-# Run Flask Application
-# =========================
 if __name__ == "__main__":
     app.run(debug=True)

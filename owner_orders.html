@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Owner Orders - Black Ninja</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+            padding: 25px;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+
+        .orders {
+            max-width: 900px;
+            margin: auto;
+        }
+
+
+        .order-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.1);
+        }
+
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+
+        .order-header h2 {
+            margin: 0;
+        }
+
+
+        .status-badge {
+            padding: 8px 14px;
+            border-radius: 20px;
+            background: #eeeeee;
+            font-weight: bold;
+        }
+
+
+        .details {
+            line-height: 1.8;
+        }
+
+
+        .food-section {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 10px;
+        }
+
+
+        .food-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+
+        .total {
+            margin-top: 10px;
+            font-size: 19px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+
+        select {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #111;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+
+        button:hover {
+            background: #333;
+        }
+
+
+        .no-orders {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<h1>
+    🥙 Black Ninja - Owner Orders
+</h1>
+<div style="
+    max-width: 900px;
+    margin: 0 auto 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+">
+
+    <div style="background:white; padding:20px; border-radius:12px; text-align:center;">
+        <h3>🛒 Total Orders</h3>
+        <h2>{{ orders|length }}</h2>
+    </div>
+
+    <div style="background:white; padding:20px; border-radius:12px; text-align:center;">
+        <h3>🍳 Preparing</h3>
+        <h2>
+            {{ orders|selectattr("order_status", "equalto", "Preparing")|list|length }}
+        </h2>
+    </div>
+
+    <div style="background:white; padding:20px; border-radius:12px; text-align:center;">
+        <h3>📦 Packed</h3>
+        <h2>
+            {{ orders|selectattr("order_status", "equalto", "Packed")|list|length }}
+        </h2>
+    </div>
+
+    <div style="background:white; padding:20px; border-radius:12px; text-align:center;">
+        <h3>🛵 Delivery</h3>
+        <h2>
+            {{ orders|selectattr("order_status", "equalto", "Out for Delivery")|list|length }}
+        </h2>
+    </div>
+
+    <div style="background:white; padding:20px; border-radius:12px; text-align:center;">
+        <h3>✅ Delivered</h3>
+        <h2>
+            {{ orders|selectattr("order_status", "equalto", "Delivered")|list|length }}
+        </h2>
+    </div>
+
+</div>
+
+<div class="orders">
+
+
+{% if orders %}
+
+
+    {% for order in orders %}
+
+
+    <div class="order-card">
+
+
+        <!-- =========================
+             ORDER HEADER
+        ========================== -->
+
+        <div class="order-header">
+
+            <h2>
+                Order #{{ order.id }}
+            </h2>
+
+
+            <div class="status-badge">
+
+                {{ order.order_status }}
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             CUSTOMER DETAILS
+        ========================== -->
+
+        <div class="details">
+
+            <strong>
+                Customer Details
+            </strong>
+
+            <br>
+
+
+            Name:
+            {{ order.customer_name }}
+
+            <br>
+
+
+            Phone:
+            {{ order.phone }}
+
+            <br>
+
+
+            Address:
+            {{ order.address }}
+
+            <br>
+
+
+            Payment:
+            {{ order.payment_method }}
+
+        </div>
+
+
+        <!-- =========================
+             FOOD DETAILS
+        ========================== -->
+
+        <div class="food-section">
+
+            <strong>
+                🍽️ Ordered Items
+            </strong>
+
+
+            <div class="food-row">
+
+                <span>
+                    Regular Shawarma
+                </span>
+
+                <strong>
+                    {{ order.regular_qty }}
+                </strong>
+
+            </div>
+
+
+            <div class="food-row">
+
+                <span>
+                    King Plate
+                </span>
+
+                <strong>
+                    {{ order.king_qty }}
+                </strong>
+
+            </div>
+
+
+            <div class="food-row">
+
+                <span>
+                    🍜 Maggi Soup
+                </span>
+
+                <strong>
+                    {{ order.maggi_qty }}
+                </strong>
+
+            </div>
+
+
+            <div class="total">
+
+                Total:
+                ₹{{ order.total }}
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             UPDATE STATUS
+        ========================== -->
+
+        <form
+            method="POST"
+            action="/owner/update_status/{{ order.id }}"
+        >
+
+
+            <select name="order_status">
+
+
+                <option
+                    value="Order Placed"
+                    {% if order.order_status == "Order Placed" %}
+                    selected
+                    {% endif %}
+                >
+                    Order Placed
+                </option>
+
+
+                <option
+                    value="Preparing"
+                    {% if order.order_status == "Preparing" %}
+                    selected
+                    {% endif %}
+                >
+                    🍳 Preparing
+                </option>
+
+
+                <option
+                    value="Packed"
+                    {% if order.order_status == "Packed" %}
+                    selected
+                    {% endif %}
+                >
+                    📦 Packed
+                </option>
+
+
+                <option
+                    value="Out for Delivery"
+                    {% if order.order_status == "Out for Delivery" %}
+                    selected
+                    {% endif %}
+                >
+                    🛵 Out for Delivery
+                </option>
+
+
+                <option
+                    value="Delivered"
+                    {% if order.order_status == "Delivered" %}
+                    selected
+                    {% endif %}
+                >
+                    ✅ Delivered
+                </option>
+
+
+                <option
+                    value="Cancelled"
+                    {% if order.order_status == "Cancelled" %}
+                    selected
+                    {% endif %}
+                >
+                    ❌ Cancelled
+                </option>
+
+
+            </select>
+
+
+            <button type="submit">
+
+                Update Status
+
+            </button>
+<a
+    href="https://wa.me/919360796776"
+    target="_blank"
+    style="
+        display: block;
+        margin-top: 10px;
+        padding: 12px 20px;
+        background: #25D366;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+    "
+>
+    📱 WhatsApp Customer
+</a>
+
+        </form>
+
+
+    </div>
+
+
+    {% endfor %}
+
+
+{% else %}
+
+
+    <div class="no-orders">
+
+        <h2>
+            No Orders Yet
+        </h2>
+
+        <p>
+            Customer orders will appear here.
+        </p>
+
+    </div>
+
+
+{% endif %}
+
+
+</div>
+<script>
+    setInterval(function () {
+        location.reload();
+    }, 10000);
+</script>
+
+</body>
+
+</html>
